@@ -284,6 +284,8 @@ done < <(env | awk '/^USER[0-9=_]/ {sub (/^[^=]*=/, "", $0); print}')
 [[ "${INCLUDE:-""}" ]] && include "$INCLUDE"
 [[ "${PERMISSIONS:-""}" ]] && perms &
 
+sed '/\[global\]/a \ \ \ min protocol = NT1;' /etc/samba/smb.conf
+
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
 elif [[ $# -ge 1 ]]; then
